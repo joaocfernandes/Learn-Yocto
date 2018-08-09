@@ -15,6 +15,7 @@ The tutorial will be followed with some small modifications in order to test a d
         - Set your machine to ```MACHINE = "qemuarm"```
         - Set the package manager to deb ```PACKAGE_CLASSES ?= "package_deb"```
         - Set the SSTate Mirrors to save time in the builds.  
+        
         ```
             SSTATE_MIRRORS = "\
             file://.* http://sstate.yoctoproject.org/dev/PATH;downloadfilename=PATH \n \
