@@ -4,15 +4,17 @@ This guide intends to summarize the basic knowledge and steps performed through 
 
 ## [Yocto Project Quick Build](https://www.yoctoproject.org/docs/2.5/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
 
-The tutorial will be follow with some small modifications in order to test a diferent target architecture.
+The tutorial will be followed with some small modifications in order to test a diferent target architecture.
 
-- Use Git to clone Poky repo (don't forget to switch to desired version branch)
+- Use Git to clone Poky repo using the apropriate [version](https://wiki.yoctoproject.org/wiki/Releases) branch)  
+```$ git clone -b sumo git://git.yoctoproject.org/poky.git```
 - Build Your Image
-    - Initialize the build env  ```$ source oe-init-build-env```
+    - Initialize the build env  
+    ```$ source oe-init-build-env```
     - Modify your local.conf file  
         - Set your machine to ```MACHINE = "qemuarm"```
         - Set the package manager to deb ```PACKAGE_CLASSES ?= "package_deb"```
-        - Set the SSTate Mirrors to save time in the builds.
+        - Set the SSTate Mirrors to save time in the builds.  
         ```
             SSTATE_MIRRORS = "\
             file://.* http://sstate.yoctoproject.org/dev/PATH;downloadfilename=PATH \n \
@@ -27,7 +29,8 @@ The tutorial will be follow with some small modifications in order to test a dif
             - meta-toolchain (??)
             - meta-ide-support (??)
         
-- Run the image on qemu. ```$ runqemu qemuarm ```
+- Run the image on qemu.  
+```$ runqemu qemuarm ```
 
 ## [Yocto Project Application Development and the Extensible Software Development Kit](https://www.yoctoproject.org/docs/2.5/sdk-manual/sdk-manual.htm)
 
@@ -38,4 +41,5 @@ The tutorial will be follow with some small modifications in order to test a dif
 
 Modify your image to be built with support for eclipse debugging, use the steps mentioned in the [wiki](https://wiki.yoctoproject.org/wiki/TipsAndTricks/RunningEclipseAgainstBuiltImage).
 
--Build your Image ```$ bitbake -k core-image-minimal -c populate_sdk```
+- Build your Image ```$ bitbake -k core-image-sato -c populate_sdk```
+- Build the meta-ide-support image ```$ bitbake -k meta-ide-support```
