@@ -54,3 +54,13 @@ The list of all meta-raspberrypi dependencies are contained in the [Readme.md](h
 
     - Build the image  *minimal* ```$ bitbake -k core-image-minimal```.  
     Other available images are listed [here](https://github.com/agherzan/meta-raspberrypi/blob/sumo/docs/layer-contents.md#images).
+
+## Transfer the image to the sd card
+
+**Check what is your sd card device. Example used device /dev/XYZ. This operation is not reversible.**
+
+To check what is your sd card device use ```$ sudo lsblk -io KNAME,TYPE,SIZE,MODEL --nodep ```
+
+
+```
+$ sudo dd if=build/tmp/deploy/images/raspberrypi/core-image-minimal-raspberrypi-20180810110222.rootfs.rpi-sdimg of=/dev/XYZ bs=1M ```
