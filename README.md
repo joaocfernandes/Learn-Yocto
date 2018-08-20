@@ -22,25 +22,13 @@ The tutorial will be followed with some small modifications in order to test a d
             file://.* http://sstate.yoctoproject.org/2.4/PATH;downloadfilename=PATH \n \
             file://.* http://sstate.yoctoproject.org/2.5/PATH;downloadfilename=PATH \n \"
         ```       
-        - Build the image  *minimal* ```$ bitbake -k core-image-minimal```  or the *sato* with ```$ bitbake -k core-image-sato```
+        - Build the image  *minimal* ```$ bitbake -k core-image-minimal```  or the graphical [*sato*](https://en.wikipedia.org/wiki/OpenedHand) with ```$ bitbake -k core-image-sato```
 
             Common targets are:
             - core-image-minimal (no X server)
             - core-image-sato (X server with SATO)
             - meta-toolchain (??)
-            - meta-ide-support (??)
+            - meta-ide-support (package for ensuring the build directory contains all appropriate toolchain packages for using an IDE) check also [Tips and Tricks](https://wiki.yoctoproject.org/wiki/TipsAndTricks/RunningEclipseAgainstBuiltImage)
         
 - Run the image on qemu.  
 ```$ runqemu qemuarm ```
-
-## [Yocto Project Application Development and the Extensible Software Development Kit](https://www.yoctoproject.org/docs/2.5/sdk-manual/sdk-manual.htm)
-
-
-- Install the eSDK download from [here](http://downloads.yoctoproject.org/releases/yocto/yocto-2.5/toolchain/)
-- Install eclipse from the Eclipse site. Current supported versions are Oxygen and Neon. Do not install Eclipse from your distribution's package repository. 
-- Configure Eclipse according to the [sdk-manual](https://www.yoctoproject.org/docs/2.5/sdk-manual/sdk-manual.html#oxygen-setting-up-the-eclipse-ide).
-
-Modify your image to be built with support for eclipse debugging, use the steps mentioned in the [wiki](https://wiki.yoctoproject.org/wiki/TipsAndTricks/RunningEclipseAgainstBuiltImage).
-
-- Build your Image ```$ bitbake -k core-image-sato -c populate_sdk```
-- Build the meta-ide-support image ```$ bitbake -k meta-ide-support```
