@@ -1,13 +1,13 @@
-## [Yocto Project Quick Start](https://www.yoctoproject.org/docs/2.5/brief-yoctoprojectqs/brief-yoctoprojectqs.html)
+## Yocto Quick Start
 
-The tutorial will be followed with some small modifications in order to test a diferent target architecture.
+This tutorial has the main objective of generating and runnning a yocto image for arm on qemu.
 
 - Use Git to clone Poky repo using the apropriate [version](https://wiki.yoctoproject.org/wiki/Releases) branch)  
 ```$ git clone -b sumo git://git.yoctoproject.org/poky.git```
 - Build Your Image
     - Initialize the build env  
     ```$ source oe-init-build-env```
-    - Modify your local.conf file  
+    - Modify your build/conf/local.conf file  
         - Set your machine to ```MACHINE = "qemuarm"```
         - Set the package manager to deb ```PACKAGE_CLASSES ?= "package_deb"```
         - Set the SSTate Mirrors to save time in the builds.  
