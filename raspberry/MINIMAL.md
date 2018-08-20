@@ -63,4 +63,11 @@ To check what is your sd card device use ```$ sudo lsblk -io KNAME,TYPE,SIZE,MOD
 
 
 ```
-$ sudo dd if=build/tmp/deploy/images/raspberrypi/core-image-minimal-raspberrypi-20180810110222.rootfs.rpi-sdimg of=/dev/XYZ status=progress```
+$ sudo dd if=build/tmp/deploy/images/raspberrypi/core-image-minimal-raspberrypi-20180810110222.rootfs.rpi-sdimg of=/dev/XYZ status=progress
+```
+
+
+## Boot the image
+
+Insert the sd card into your Raspberry Pi.  
+If everything went smoothly you should be able to see a login prompt. Just use *root* without any password.
