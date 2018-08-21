@@ -1,4 +1,4 @@
-# Raspberry Pi Image
+# Raspberry Pi minimal image
 
 This guide intends to summarize the essencial steps performed to build a Raspberry Pi minmal image using Yocto.
 
