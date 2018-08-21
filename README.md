@@ -7,7 +7,8 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 ## Tutorials
 
 * [QuickStart](./quickstart/README.md)
-* [Raspberry Pi](./raspberry/MINIMAL.md)
+* [Raspberry Pi minimal](./raspberry/MINIMAL.md)
+* [Raspberry Pi base](./raspberry/BASE.md)
 
 ## References
 
