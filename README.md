@@ -18,3 +18,5 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 * [Yocto Mega Manual](https://www.yoctoproject.org/docs/latest/mega-manual/mega-manual.html)
 
 * [Yocto Wiki](https://wiki.yoctoproject.org/wiki/Main_Page)
+
+* [Genivi Confluence](https://at.projects.genivi.org/wiki/display/GDP/GDP+Master)
