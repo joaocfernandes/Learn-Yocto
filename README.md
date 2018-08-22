@@ -9,6 +9,7 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 * [QuickStart](./quickstart/README.md)
 * [Raspberry Pi minimal](./raspberry/MINIMAL.md)
 * [Raspberry Pi base](./raspberry/BASE.md)
+* [Genivi-dev-platform] (./genivi/README.md)
 
 ## References
 
