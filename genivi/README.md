@@ -19,7 +19,7 @@ $ bitbake -k genivi-dev-platform
 
 Oh yes! It will take time...
 
-##Compile Qemu with hardware graphics acceleration
+## Compile Qemu with hardware graphics acceleration
 
 * Compile it with the proper options
 
@@ -72,7 +72,7 @@ $QEMU_VIRGL_PATH" \
 -cpu core2duo \
 -no-reboot \
 -soundhw ac97 \
--m 2048 \
+-m 512 \
 -display sdl,gl=on \
 --append "vga=0 uvesafb.mode_option=640x480-32 root=/dev/hda rw mem=512M oprofile.timer=1
 ```
