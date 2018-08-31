@@ -1,4 +1,4 @@
-# Yocto Hello World Recipe
+# Hello World CMake Recipe
 
 Prerequisites:
 
@@ -15,86 +15,48 @@ meta-first/
 ├── COPYING.MIT
 ├── README
 └── recipes-hello
-    └── hello
-        ├── files
-        │   └── helloworld.c
-        └──hello_0.1.bb
+    ├── hello
+    │   ├── files
+    │   │   ├── helloworld-2.c
+    │   │   └── helloworld.c
+    │   ├── hello_0.1.bb
+    │   └── hello_0.2.bb
+    └── hellocmake
+        ├── files
+        │   ├── CMakeLists.txt
+        │   └── hellocmake.cpp
+        └── hellocmake.bb
+
 ```
 
-The helloworld.c contains the code that outputs "Hello World".
-
-Focusing on the recipe hello_0.1.bb it contains the following:
+The file hellocmake.cpp contains the code that outputs "Hello World".  
+The CMakeLists contains the following
+```
+cmake_minimum_required(VERSION 1.9)
+project (hellocmake)
+add_executable(hellocmake hellocmake.cpp)
+install(TARGETS hellocmake RUNTIME DESTINATION bin)
 
 ```
-SUMMARY = "Simple Hello World application"
+
+The Yocto build system contains classes to support building CMake packages. To use CMake in a recipe you need to inherit the CMake class.
+Generally the CMake build system knows how to install the software so a overwrite over do_install is not necessary.
+
+```
+SUMMARY = "Simple Hello World Cmake application"
 SECTION = "examples"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "file://helloworld.c"
-
-TARGET_CC_ARCH += "${LDFLAGS}" 
+SRC_URI = "\
+            file://CMakeLists.txt \
+            file://hellocmake.cpp \
+        "
 
 S = "${WORKDIR}"
 
-do_compile() {
-${CC} helloworld.c -o helloworld
-}
+inherit cmake
 
-do_install() {
-install -d ${D}${bindir}
-install -m 0755 helloworld ${D}${bindir}
-}
+EXTRA_OECMAKE = ""
 ```
 
-Now that we have the recipe hello created, let's try to build it using bitbake and verify if the output packages are generated.
-
-```console
-joao@joao-ThinkPad-T470p:~/yocto/poky$ bitbake hello
-Loading cache: 100% |###############################################################################################################################################################################| Time: 0:00:00
-Loaded 3081 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "1.38.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "arm-poky-linux-gnueabi"
-MACHINE              = "raspberrypi"
-DISTRO               = "poky"
-DISTRO_VERSION       = "2.5.1"
-TUNE_FEATURES        = "arm armv6 vfp arm1176jzfs callconvention-hard"
-TARGET_FPU           = "hard"
-(output ommited ...)
-joao@joao-ThinkPad-T470p:~/yocto/poky$ cd build/tmp/deploy/deb/arm1176jzfshf-vfp/
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ ls -l hello*
--rw-r--r-- 2 joao joao  1940 ago 31 12:00 hello_0.1-r0_armhf.deb
--rw-r--r-- 2 joao joao  5412 ago 31 12:00 hello-dbg_0.1-r0_armhf.deb
--rw-r--r-- 2 joao joao   768 ago 31 12:00 hello-dev_0.1-r0_armhf.deb
-```
-
-The packages are created.  
-If they are to be installed into a new built image they need to be added through the [IMAGE_INSTALL](https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-IMAGE_INSTALL). For a simple example add ```IMAGE_INSTALL_append = " hello"``` to local.conf. This will affect all images. A better solution is to modify a specific image recipe.
-
-## Checking package contents
-
-Just out of curiosity we can check if the binary is contained within the package and validate the target architecture.
-
-```console
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ mkdir hellotmp
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ dpkg -x hello_0.1-r0_armhf.deb hellotmp/
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ cd hellotmp/
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp$ ls
-usr
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp$ cd usr/bin/
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp/usr/bin$ ls -al
-total 16
-drwxr-xr-x 2 joao joao 4096 ago 31 12:00 .
-drwxr-xr-x 3 joao joao 4096 ago 31 12:00 ..
--rwxr-xr-x 1 joao joao 5532 ago 31 12:00 helloworld
-joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp/usr/bin$ file helloworld 
-helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=b93c751569ec6a184bf5ae5c9a43981ec7b190d9, stripped
-
-```
-
-The helloworld executable is correctly built targetting the ARM ISA. As a reminder our MACHINE is set to raspberrypi.
