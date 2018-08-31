@@ -54,5 +54,20 @@ NOTE: Starting bitbake server...
 Add your new layer with 'bitbake-layers add-layer meta-newlayer'
 ```
 
+As you can see by the output just creating the layer does not add it to the bblayers.conf file.
+
+The created folder structure is:
+
+```console
+joao@joao-ThinkPad-T470p:~/yocto/poky$ tree meta-newlayer
+meta-newlayer
+├── conf
+│   └── layer.conf
+├── COPYING.MIT
+├── README
+└── recipes-example
+    └── example
+        └── example_0.1.bb
+```
 
 
