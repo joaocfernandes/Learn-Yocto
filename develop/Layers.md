@@ -39,3 +39,20 @@ LAYERSERIES_COMPAT_meta-first = "sumo"
 ```
 
 An detailed explanation of the configuration file options is present in the [ Yocto dev manual](https://www.yoctoproject.org/docs/latest/dev-manual/dev-manual.html#creating-your-own-layer).
+
+## Create a Layer programmatically
+
+Another way to add a layer is to use the *bitbake-layers* script together with the *create-layer* subcommand.
+
+This facilitates the addition of a new layer comparing with doing it by hand and can also be used for scripting.
+
+Follows a use example:
+
+```console
+joao@joao-ThinkPad-T470p:~/yocto/poky$ bitbake-layers create-layer meta-newlayer
+NOTE: Starting bitbake server...
+Add your new layer with 'bitbake-layers add-layer meta-newlayer'
+```
+
+
+
