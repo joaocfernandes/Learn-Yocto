@@ -1,5 +1,7 @@
 # Create your first general Layer
 
+In this tutorial we treat the creation of general layers and exclude the creation of BSP layers. The main diference between a General layer and a BSP layer is the existence of a machine configuration file and optionally a kernel recipe (.bb) or a kernel append file (.bbappend).
+
 Follow the [ Yocto dev manual](https://www.yoctoproject.org/docs/latest/dev-manual/dev-manual.html#creating-your-own-layer) instructions.
 
 The layer created was called *first*, therefore the folder meta-frist was created.
