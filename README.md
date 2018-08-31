@@ -11,6 +11,7 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 * [Raspberry Pi base](./raspberry/BASE.md)
 * [Create a Layer](./develop/Layers.md)
 * [Create a Recipe for single .c](./develop/Recipe-c.md)
+* [Create a Recipe for CMake](./develop/Recipe-CMake.md)
 * [Genivi Development Platform](./genivi/README.md)
 
 ## References
