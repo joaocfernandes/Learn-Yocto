@@ -9,6 +9,8 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 * [QuickStart](./quickstart/README.md)
 * [Raspberry Pi minimal](./raspberry/MINIMAL.md)
 * [Raspberry Pi base](./raspberry/BASE.md)
+* [Create a Layer](./develop/Layers.md)
+* [Create a Recipe for single .c](./develop/Recipe-c.md)
 * [Genivi Development Platform](./genivi/README.md)
 
 ## References
