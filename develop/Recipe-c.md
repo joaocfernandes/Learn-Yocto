@@ -73,5 +73,28 @@ joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ ls
 -rw-r--r-- 2 joao joao   768 ago 31 12:00 hello-dev_0.1-r0_armhf.deb
 ```
 
-The packages are created. 
-If they are to be installed into a new built image they need to be added through the [IMAGE_INSTALL](https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-IMAGE_INSTALL). For a simple example add IMAGE_INSTALL_append = " hello" to local.conf this will affect all images. A better solution is to modify the specific image recipe.
+The packages are created.  
+If they are to be installed into a new built image they need to be added through the [IMAGE_INSTALL](https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-IMAGE_INSTALL). For a simple example add ```IMAGE_INSTALL_append = " hello"``` to local.conf. This will affect all images. A better solution is to modify a specific image recipe.
+
+## Checking package contents
+
+Just out of curiosity we can check if the binary is contained within the package and validate the target architecture.
+
+```console
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ mkdir hellotmp
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ dpkg -x hello_0.1-r0_armhf.deb hellotmp/
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp$ cd hellotmp/
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp$ ls
+usr
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp$ cd usr/bin/
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp/usr/bin$ ls -al
+total 16
+drwxr-xr-x 2 joao joao 4096 ago 31 12:00 .
+drwxr-xr-x 3 joao joao 4096 ago 31 12:00 ..
+-rwxr-xr-x 1 joao joao 5532 ago 31 12:00 helloworld
+joao@joao-ThinkPad-T470p:~/yocto/poky/build/tmp/deploy/deb/arm1176jzfshf-vfp/hellotmp/usr/bin$ file helloworld 
+helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=b93c751569ec6a184bf5ae5c9a43981ec7b190d9, stripped
+
+```
+
+The helloworld executable is correctly built targetting the ARM ISA. As a reminder our MACHINE is set to raspberrypi.
