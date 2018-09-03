@@ -60,7 +60,7 @@ Take into account that the output of your genivi build is in the folder genivi-d
 To launch the genivi image in qemu, from the build images folder do:
 
 ```
-$QEMU_VIRGL_PATH" \
+$QEMU_VIRGL_PATH \
 -kernel bzImage \
 -drive "file=genivi-dev-platform-qemux86-64.ext4,format=raw" \
 -enable-kvm \
@@ -74,7 +74,7 @@ $QEMU_VIRGL_PATH" \
 -soundhw ac97 \
 -m 512 \
 -display sdl,gl=on \
---append "vga=0 uvesafb.mode_option=640x480-32 root=/dev/hda rw mem=512M oprofile.timer=1
+--append "vga=0 uvesafb.mode_option=640x480-32 root=/dev/hda rw mem=512M oprofile.timer=1"
 ```
 
 After boot you should see something like this.
