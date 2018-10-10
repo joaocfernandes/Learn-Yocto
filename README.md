@@ -12,6 +12,7 @@ Licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0
 * [Create a Layer](./develop/Layers.md)
 * [Create a Recipe for single .c](./develop/Recipe-c.md)
 * [Create a Recipe for CMake](./develop/Recipe-CMake.md)
+* [Create a Recipe for a Qt project](./develop/Recipe-qt5.md)
 * [Genivi Development Platform](./genivi/README.md)
 
 ## References
